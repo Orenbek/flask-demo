@@ -1,13 +1,27 @@
 {% extends "base.html" %}
-{% block title %}页面标题{% endblock %}
 
+{% block head %}
+<title>人脸检测模型演示系统</title>
+<link rel="stylesheet" href="{{ url_for('static', filename = 'main.css') }}">
+<script type="module" src="{{ url_for('static', filename = 'index.js') }}" ></script>
+{% endblock %}
 {% block body %}
-<content class="container">
-  <div class="row">
-    <div class="col-md-12">
-      <h1>页面标题</h1>
-      <p>页面内容</p>
-    </div>
-  </div>
-</content>
+<h1 style="text-align: center;margin-bottom: 2em;">人脸检测模型演示系统</h1>
+  <section class="container">
+    <content class="box">
+      <h2>模型训练Demo</h2>
+      <p>请提交待输入的人脸图片文件夹</p>
+      <input type="file" name="image" id="input1">
+      <button type="button" id="button1">提交训练</button>
+    </content>
+    <content class="box">
+      <h2>模型测试Demo</h2>
+      <p>请提交待测试的人脸图片文件</p>
+      <input type="file" name="image" id="input2">
+      <button type="button" id="button2">提交预测</button>
+    </content>
+    <content class="box">
+      <h2>图片操作</h2>
+    </content>
+  </section>
 {% endblock %}
