@@ -3,7 +3,16 @@
 {% block head %}
 <title>人脸检测模型演示系统</title>
 <link rel="stylesheet" href="{{ url_for('static', filename = 'main.css') }}">
+<script type="importmap">
+  {
+    "imports": {
+      "index": "{{ url_for('static', filename = 'index.js') }}",
+      "table": "{{ url_for('static', filename = 'table.js') }}"
+    }
+  }
+  </script>
 <script type="module" src="{{ url_for('static', filename = 'index.js') }}" ></script>
+<script type="module" src="{{ url_for('static', filename = 'table.js') }}" ></script>
 {% endblock %}
 {% block body %}
 <h1 style="text-align: center;margin: 2em 0;">人脸检测模型演示系统</h1>
@@ -21,8 +30,27 @@
       <button type="button" id="button2">提交预测</button>
       <p id="imginfo" style="margin-bottom: 1em"></p>
     </content>
-    <content class="box">
+    <content class="box" style="padding: 0 1em">
       <h2>图片操作</h2>
+      <button type="button" id="button3">获取所有图片</button>
+      <table id="table">
+        <colgroup>
+          <col />
+          <col style="width: 200px;" />
+        </colgroup>
+        <thead>
+          <tr class="table-tr">
+            <th class="table-th">
+              <div class="table-th-item">图片名称</div>
+            </th>
+            <th class="table-th">
+              <div class="table-th-item">图片操作</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>      
     </content>
   </section>
 {% endblock %}

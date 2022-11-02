@@ -4,9 +4,13 @@ import os
 app = Flask(__name__)
 url_for
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
+# 保存文件夹图片
+
 
 @app.route('/upload', methods=['POST'])
 def upload():
@@ -15,14 +19,36 @@ def upload():
         value.save(f'./static/imgs/{key}')
     return jsonify({'code': 0})
 
-@app.route('/test', methods=['POST'])
-def test():
+# 获取图片信息
+
+
+@app.route('/imginfo', methods=['POST'])
+def imginfo():
     img = request.files['img']
     print(img)
     return jsonify({'code': 0, 'data': {
         'name': img.filename,
         'size': img.content_length,
     }})
+
+# 获取文件夹图片
+
+
+@app.route('/getimgs', methods=['GET'])
+def getimgs():
+    imgs = []
+    for root, subdirs, files in os.walk('./static/imgs'):
+        for file in files:
+            imgs.append(os.path.join(root, file))
+    return jsonify({'code': 0, 'data': imgs})
+
+# 删除图片
+
+
+@app.route('/delete', methods=['POST'])
+def delete():
+    os.remove(request.form['path'])
+    return jsonify({'code': 0})
 
 
 if __name__ == '__main__':
